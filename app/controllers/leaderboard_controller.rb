@@ -3,14 +3,14 @@ class LeaderboardController < ApplicationController
     rank = 1
     prev_score = 0
     @players = Player.all.order(win_count: 'desc').map do |player|
-      if player.win_count < prev_score
+      if player.score < prev_score
         rank += 1
       end
-      prev_score = player.win_count
+      prev_score = player.score
       {
         id: player.id,
         name: player.name,
-        win_count: player.win_count,
+        score: player.score,
         rank:
       }
     end
@@ -20,7 +20,7 @@ class LeaderboardController < ApplicationController
 
   def add_win_to_player
     @player = Player.find params[:id]
-    @player.win_count += 1
+    @player.score += 1
     @player.save
 
     redirect_to root_path
