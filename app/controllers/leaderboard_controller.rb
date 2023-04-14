@@ -2,7 +2,7 @@ class LeaderboardController < ApplicationController
   def index
     rank = 1
     prev_score = 0
-    @players = Player.all.order(win_count: 'desc').map do |player|
+    @players = Player.all.order(score: 'desc').map do |player|
       if player.score < prev_score
         rank += 1
       end
