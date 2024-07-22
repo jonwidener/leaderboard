@@ -1,0 +1,15 @@
+<div>
+  <%= form_for @player do |form| %>
+    <div>
+      Name: 
+      <%= form.text_field :name %>
+    </div>
+    <div>
+      Avatar:
+      <%= form.file_field :avatar %>
+    </div>
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
+</div>

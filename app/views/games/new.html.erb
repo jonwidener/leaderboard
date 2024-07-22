@@ -1,0 +1,33 @@
+<div data-controller="game" class="w-full" >
+  <%= form_for @game do |form| %>
+    <div>
+      Played On: 
+      <%= form.date_select :played_on %>
+    </div>
+    <div class="grid w-full grid-cols-2">
+      <div>
+        Available Players
+        <div class="flex space-x-2" data-game-target="availablePlayers">
+          <% Player.all.each do |player| %>
+            <%= image_tag player.avatar, 
+                          class: "h-32 w-32 rounded-full box-content", 
+                          data: { 
+                            action: "click->game#clickPlayer drag->game#dragPlayer dragend->game#dragendPlayer",
+                            game_target: "player",
+                            game_id_param: "#{player.id}"
+                          } %>
+          <% end %>
+        </div>
+      </div>
+      <div class="">
+        Game Players
+        <div class="flex border-2 border-red-500 min-h-32 space-x-2" data-game-target="gamePlayers"></div>
+      </div>
+    </div>
+    <div>
+      <%= form.hidden_field :players, value: "", data: { game_target: "players" } %>
+      <%= form.hidden_field :winner, value: "", data: { game_target: "winner" } %>
+      <%= form.submit %>
+    </div>
+  <% end %>
+</div>

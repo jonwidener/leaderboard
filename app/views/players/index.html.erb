@@ -1,0 +1,13 @@
+<div>
+  Players
+  <div>
+    <% @players.each do |player| %>
+      <div class="flex space-x-2">
+        <%= image_tag player.avatar, class: "h-32 w-32 rounded-full" %>
+        <%= player.name %>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to "New Player", new_player_path %>
+  <%= link_to "Home", root_path %>
+</div>

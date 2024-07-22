@@ -1,0 +1,19 @@
+<div>
+  Games
+  <div class="flex space-x-4">
+    <% @games.each do |game| %>
+      <div class="">
+        <div>Played On: <%= game.played_on %></div>
+        <div>Winner: <%= game.winner.name %></div>
+        <div>Players:</div>
+        <div class="flex space-x-2">
+          <% game.players.each do |player| %>
+            <%= image_tag player.avatar, class: "h-32 w-32 rounded-full" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to "New Game", new_game_path %>
+  <%= link_to "Home", root_path %>
+</div>
