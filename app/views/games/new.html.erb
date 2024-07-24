@@ -7,7 +7,7 @@
     <div class="grid w-full grid-cols-2">
       <div>
         Available Players
-        <div class="flex space-x-2" data-game-target="availablePlayers">
+        <div class="flex space-x-2 flex-wrap" data-game-target="availablePlayers">
           <% Player.all.each do |player| %>
             <%= image_tag player.avatar, 
                           class: "h-32 w-32 rounded-full box-content", 
@@ -21,7 +21,7 @@
       </div>
       <div class="">
         Game Players
-        <div class="flex border-2 border-red-500 min-h-32 space-x-2" data-game-target="gamePlayers"></div>
+        <div class="flex flex-wrap border-2 border-red-500 min-h-32 space-x-2" data-game-target="gamePlayers"></div>
       </div>
     </div>
     <div>

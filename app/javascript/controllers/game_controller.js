@@ -1,9 +1,15 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from '@hotwired/stimulus';
 
 // Connects to data-controller="game"
 export default class extends Controller {
-  static targets = ["player", "players", "gamePlayers", "availablePlayers", "winner"];
-  
+  static targets = [
+    'player',
+    'players',
+    'gamePlayers',
+    'availablePlayers',
+    'winner',
+  ];
+
   connect() {
     this.players = new Set();
   }
@@ -15,32 +21,34 @@ export default class extends Controller {
       this.winnerTarget.value = id;
 
       this.playerTargets.forEach((player) => {
-        player.style.border = "";
+        player.style.border = '';
       });
 
-      event.target.style.border = "2px solid blue";
+      event.target.style.border = '2px solid blue';
     }
   }
 
   dragPlayer(event) {
-    const el = event.target;
-    if (event.x == 0 & event.y == 0) {
-      el.style.display = "none";
+    if (event.x == 0 && event.y == 0) {
+      return;
     }
-    el.style.position = "fixed";
-    el.style.top = Math.round(event.y - el.width / 2) + "px";
-    el.style.left = Math.round(event.x - el.height / 2) + "px";
-    el.style.zIndex = "100";
+    const el = event.target;
+    el.style.position = 'fixed';
+    el.style.top = Math.round(event.y - el.width / 2) + 'px';
+    el.style.left = Math.round(event.x - el.height / 2) + 'px';
+    el.style.zIndex = '100';
   }
 
-  dragendPlayer(event) { 
+  dragendPlayer(event) {
     const { id } = event.params;
     const el = event.target;
 
-    const dropElement = document.elementFromPoint(event.x, event.y).closest("[data-game-target]");
+    const dropElement = document
+      .elementsFromPoint(event.x, event.y)
+      .find((el) => el.getAttribute('data-game-target') === 'gamePlayers');
 
-    if (dropElement == this.gamePlayersTarget) {
-      this.gamePlayersTarget.appendChild(el)
+    if (dropElement === this.gamePlayersTarget) {
+      this.gamePlayersTarget.appendChild(el);
 
       this.players.add(id);
 
@@ -49,14 +57,14 @@ export default class extends Controller {
       if (this.players.has(id)) {
         this.players.delete(id);
       }
-      this.availablePlayersTarget.appendChild(el)
-      event.target.style.border = "";
+      this.availablePlayersTarget.appendChild(el);
+      event.target.style.border = '';
     }
 
-    el.style.position = "relative";
-    el.style.top = "";
-    el.style.left = "";
-    el.style.display = "";
-    el.style.zIndex = "";
+    el.style.position = 'relative';
+    el.style.top = '';
+    el.style.left = '';
+    el.style.display = '';
+    el.style.zIndex = '';
   }
 }
