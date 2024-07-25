@@ -11,8 +11,9 @@
           <% Player.all.each do |player| %>
             <%= image_tag player.avatar, 
                           class: "h-32 w-32 rounded-full box-content", 
+                          draggable: true,
                           data: { 
-                            action: "click->game#clickPlayer drag->game#dragPlayer dragend->game#dragendPlayer",
+                            action: "click->game#clickPlayer dragend->game#dropPlayer",
                             game_target: "player",
                             game_id_param: "#{player.id}"
                           } %>

@@ -28,18 +28,7 @@ export default class extends Controller {
     }
   }
 
-  dragPlayer(event) {
-    if (event.x == 0 && event.y == 0) {
-      return;
-    }
-    const el = event.target;
-    el.style.position = 'fixed';
-    el.style.top = Math.round(event.y - el.width / 2) + 'px';
-    el.style.left = Math.round(event.x - el.height / 2) + 'px';
-    el.style.zIndex = '100';
-  }
-
-  dragendPlayer(event) {
+  dropPlayer(event) {
     const { id } = event.params;
     const el = event.target;
 
